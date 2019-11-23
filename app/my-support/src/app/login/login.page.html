@@ -1,9 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>login</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <div class="form-container">
+        <form
+            [formGroup]="loginForm"
+            (ngSubmit)="submitForm(loginForm)"
+        >
+            <ion-item color="primary" class="input-container">
+                <ion-label color="dark">Email</ion-label>
+                <ion-input
+                    formControlName="email"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container">
+                <ion-label color="dark">Password</ion-label>
+                <ion-input
+                    formControlName="password"
+                    type="password"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-button
+                expand="block"
+                color="success"
+                type="submit"
+                class="login"
+                [disabled]="loginForm.invalid"
+            >
+                Log In
+            </ion-button>
+        </form>
+        <ion-button
+            [routerLink]="['/create-account']" 
+            expand="block"
+            color="secondary"
+            type="button"
+            class="create-account"
+        >
+            Create Account
+        </ion-button>
+    </div>
 </ion-content>
