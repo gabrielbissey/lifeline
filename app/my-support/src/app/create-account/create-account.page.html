@@ -1,16 +1,32 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>login</ion-title>
+        <ion-title>Create Account</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="form-container">
         <form
-            [formGroup]="loginForm"
-            (ngSubmit)="submitForm(loginForm)"
+            [formGroup]="createAccountForm"
+            (ngSubmit)="submitForm(createAccountForm)"
         >
-            <ion-item color="primary" class="input-container">
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">First Name</ion-label>
+                <ion-input
+                    formControlName="firstName"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Last Name</ion-label>
+                <ion-input
+                    formControlName="lastName"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
                 <ion-label color="dark">Email</ion-label>
                 <ion-input
                     formControlName="email"
@@ -18,10 +34,26 @@
                 >
                 </ion-input>
             </ion-item>
-            <ion-item color="primary" class="input-container">
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Phone Number</ion-label>
+                <ion-input
+                    formControlName="phoneNumber"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
                 <ion-label color="dark">Password</ion-label>
                 <ion-input
                     formControlName="password"
+                    type="password"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Verify Password</ion-label>
+                <ion-input
+                    formControlName="verifyPassword"
                     type="password"
                 >
                 </ion-input>
@@ -30,20 +62,20 @@
                 expand="block"
                 color="success"
                 type="submit"
-                class="login"
-                [disabled]="loginForm.invalid"
+                class="create-account"
+                [disabled]="createAccountForm.invalid"
             >
-                Log In
+                Create Account
             </ion-button>
         </form>
         <ion-button
-            [routerLink]="['/create-account']" 
+            [routerLink]="['/']" 
             expand="block"
-            color="secondary"
+            color="danger"
             type="button"
-            class="create-account"
+            class="back"
         >
-            Create Account
+            Back
         </ion-button>
     </div>
 </ion-content>
