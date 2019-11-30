@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# import database_credentials
+import support.database_credentials as db_creds
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,14 +79,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'my_support',
-        # 'USER': database_credentials.username,
-        # 'PASSWORD': database_credentials.password,
-        # 'HOST': database_credentials.host,
-        # 'PORT': database_credentials.port
-        'USER': 'sample_user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'USER': db_creds.username,
+        'PASSWORD': db_creds.password,
+        'HOST': db_creds.host,
+        'PORT': db_creds.port
     }
 }
 
