@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+# import database_credentials
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'support'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,16 @@ WSGI_APPLICATION = 'my_support.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'my_support',
+        # 'USER': database_credentials.username,
+        # 'PASSWORD': database_credentials.password,
+        # 'HOST': database_credentials.host,
+        # 'PORT': database_credentials.port
+        'USER': 'sample_user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
