@@ -1,0 +1,12 @@
+@url = http://localhost:8000
+
+
+
+POST {{url}}/users/new-account
+
+{
+    "first_name": "first"
+}
+
+###
+GET {{url}}/users/new-account
