@@ -1,14 +1,4 @@
-@url = http://localhost:8000
-
-GET {{url}}/user
+@url = http://localhost:3000
 
 ###
-POST {{url}}/user/create-account
-
-{
-    "first_name": "first",
-    "last_name": "last"
-}
-
-###
-GET {{url}}/user/create-account
+GET {{url}}/a
