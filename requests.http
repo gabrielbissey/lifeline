@@ -1,4 +1,10 @@
 @url = http://localhost:3000
+@jsonContent = content-type: application/json
 
 ###
-GET {{url}}/a
+POST {{url}}/create-account
+{{jsonContent}}
+
+{
+    "firstName": "Elias"
+}
