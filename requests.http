@@ -1,12 +1,14 @@
 @url = http://localhost:8000
 
+GET {{url}}/user
 
-
-POST {{url}}/users/new-account
+###
+POST {{url}}/user/create-account
 
 {
-    "first_name": "first"
+    "first_name": "first",
+    "last_name": "last"
 }
 
 ###
-GET {{url}}/users/new-account
+GET {{url}}/user/create-account
