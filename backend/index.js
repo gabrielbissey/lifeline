@@ -1,45 +1,64 @@
 const express = require('express');
+const db = require('./db');
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const dbCreds = require('./db-creds');
-const db = require('./db');
-const app = express();
-const port = 3000;
 const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mongodb.net/test?retryWrites=true&w=majority`
 const dbName = 'myProject';
-
-// npx nodemon to run nodemon
-app.use(express.json());
-
+const port = 3000;
+const app = express();
 const client = new MongoClient(uri);
 
-// Use connect method to connect to the Server
-client.connect(function (err) {
-    assert.equal(null, err);
-    console.log("Connected successfully to server");
+app.use(express.json());
 
-    const dataBase = client.db(dbName);
 
-    db.insertDocuments(dataBase, function() {
-        // findDocuments(db, {a: 2}, function() {
-        //     client.close();
-        // });
+const getCollection = (db) => {
+    return db.collection('documents');
+}
 
-        // updateDocument(db, function() {
-        //     removeDocument(db, function() {
-        //         client.close();
-        //     });
-        // });
+const dbContext = (fn) => {
+    client.connect((err) => {
+        assert.equal(null, err);
+        console.log('Connected successfully to database');
 
-        db.indexCollection(dataBase, function() {
+        const db = client.db(dbName);
+        const coll = getCollection(db);
+
+        fn(err, coll);
+    });
+}
+
+// npx nodemon to run nodemon
+app.post('/create-account', (req, res) => {
+    const user = req.body;
+
+    console.log(req.body.email);
+
+    dbContext((err, coll) => {
+        coll.insertOne(user, (err, result) => {
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            assert.equal(1, result.ops.length);
+            
+
+            res.end('Successfully created user', user.email);
             client.close();
         });
     });
 });
 
-app.post('/create-account', (req, res) => {
-    console.log(req.body.firstName);
-    res.send(req.body.firstName);
+app.get('/user', (req, res) => {
+
+    dbContext((err, coll) => {
+        coll.find({email: req.query.email}).toArray((err, user) => {
+            assert.equal(err, null);
+
+            console.log('Successfully retrieved users');
+            
+            res.send(user)
+            client.close();
+        });
+    });
 });
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

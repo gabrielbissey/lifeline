@@ -6,5 +6,8 @@ POST {{url}}/create-account
 {{jsonContent}}
 
 {
-    "firstName": "Elias"
+    "email": "first"
 }
+
+###
+GET {{url}}/user?email=first
