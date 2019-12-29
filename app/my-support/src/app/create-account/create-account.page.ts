@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { HttpService } from './../services/http.service';
+
 @Component({
     selector: 'app-create-account',
     templateUrl: './create-account.page.html',
@@ -9,7 +11,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class CreateAccountPage implements OnInit {
     createAccountForm: FormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder,
+                private httpService: HttpService) { }
 
     ngOnInit() {
         this.initForm();
@@ -29,7 +32,11 @@ export class CreateAccountPage implements OnInit {
     submitForm(form: FormGroup): void {
         console.log('submit form');
 
-        // this method will be obsolete when http service is created.
+        this.httpService.createAccount(form.value).subscribe(
+            res => {
+                console.log(res);
+            }
+        );
     }
 
 }
