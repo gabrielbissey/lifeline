@@ -3,6 +3,8 @@ const db = require('./db');
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const dbCreds = require('./db-creds');
+const cors = require('cors');
+
 const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mongodb.net/test?retryWrites=true&w=majority`
 const dbName = 'myProject';
 const port = 3000;
@@ -10,7 +12,7 @@ const app = express();
 const client = new MongoClient(uri);
 
 app.use(express.json());
-
+app.use(cors());
 
 const getCollection = (db) => {
     return db.collection('documents');
