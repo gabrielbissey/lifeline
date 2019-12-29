@@ -6,8 +6,12 @@ POST {{url}}/create-account
 {{jsonContent}}
 
 {
-    "email": "first"
+    "email": "gabrielbissey",
+    "firstName": "Gabriel",
+    "lastName": "Bissey",
+    "phoneNumber": "555-555-5555",
+    "supporter": true
 }
 
 ###
-GET {{url}}/user?email=first
+GET {{url}}/user?email=gabrielbissey@gmail.com

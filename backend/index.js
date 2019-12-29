@@ -32,8 +32,6 @@ const dbContext = (fn) => {
 app.post('/create-account', (req, res) => {
     const user = req.body;
 
-    console.log(req.body.email);
-
     dbContext((err, coll) => {
         coll.insertOne(user, (err, result) => {
             assert.equal(err, null);
@@ -50,12 +48,15 @@ app.post('/create-account', (req, res) => {
 app.get('/user', (req, res) => {
 
     dbContext((err, coll) => {
-        coll.find({email: req.query.email}).toArray((err, user) => {
+
+        coll.find({email: req.query.email}).toArray((err, users) => {
             assert.equal(err, null);
 
-            console.log('Successfully retrieved users');
+            const user = users[0];
+
+            console.log(`Successfully retrieved user ${user.email}`);
             
-            res.send(user)
+            res.send(user);
             client.close();
         });
     });
