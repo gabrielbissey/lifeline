@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { HttpService } from './../services/http.service';
+
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-create-account',
     templateUrl: './create-account.page.html',
     styleUrls: ['./create-account.page.scss'],
 })
-export class CreateAccountPage implements OnInit {
+export class CreateAccountPage implements OnInit, OnDestroy {
+    subs = new Subscription();
     createAccountForm: FormGroup;
 
     constructor(private fb: FormBuilder,
@@ -20,23 +23,28 @@ export class CreateAccountPage implements OnInit {
 
     initForm(): void {
         this.createAccountForm = this.fb.group({
-            firstName: [null, Validators.required],
-            lastName: [null, Validators.required],
-            email: [null, Validators.required],
-            phoneNumber: [null, Validators.required],
-            password: [null, Validators.required],
-            verifyPassword: [null]
+            firstName: ['first', Validators.required],
+            lastName: ['last', Validators.required],
+            email: ['email', Validators.required],
+            phoneNumber: ['111', Validators.required],
+            password: ['pass', Validators.required],
+            verifyPassword: ['pass']
         });
     }
 
     submitForm(form: FormGroup): void {
         console.log('submit form');
 
-        this.httpService.createAccount(form.value).subscribe(
-            res => {
-                console.log(res);
-            }
+        this.subs.add(
+            this.httpService.createAccount(form.value).subscribe(
+                res => {
+                    console.log(res);
+                }
+            )
         );
     }
 
+    ngOnDestroy() {
+        this.subs.unsubscribe();
+    }
 }

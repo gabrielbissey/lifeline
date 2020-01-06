@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class HttpService {
-    url = 'localhost:3000';
+    url = 'http://localhost:3000';
     headers = new HttpHeaders({
         'content-type': 'application/json'
     });
@@ -15,6 +15,7 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     createAccount(user): Observable<any> {
-        return this.http.post(`${this.url}/create-account`, user, {headers: this.headers});
+        return this.http.get(`${this.url}`);
+        // return this.http.post(`${this.url}/create-account`, user, {headers: this.headers});
     }
 }

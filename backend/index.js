@@ -14,6 +14,8 @@ const client = new MongoClient(uri);
 app.use(express.json());
 app.use(cors());
 
+// npx nodemon to run nodemon
+
 const getCollection = (db) => {
     return db.collection('documents');
 }
@@ -30,7 +32,10 @@ const dbContext = (fn) => {
     });
 }
 
-// npx nodemon to run nodemon
+app.get('/', (req, res) => {
+    res.json({route: 'test'});
+})
+
 app.post('/create-account', (req, res) => {
     const user = req.body;
 
@@ -41,7 +46,10 @@ app.post('/create-account', (req, res) => {
             assert.equal(1, result.ops.length);
             
 
-            res.end('Successfully created user', user.email);
+            res.json({
+                success: true,
+                message: `Successfully created user ${user.email}`
+            })
             client.close();
         });
     });
