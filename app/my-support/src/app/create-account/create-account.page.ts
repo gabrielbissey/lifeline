@@ -23,18 +23,17 @@ export class CreateAccountPage implements OnInit, OnDestroy {
 
     initForm(): void {
         this.createAccountForm = this.fb.group({
-            firstName: ['first', Validators.required],
-            lastName: ['last', Validators.required],
-            email: ['email', Validators.required],
-            phoneNumber: ['111', Validators.required],
-            password: ['pass', Validators.required],
-            verifyPassword: ['pass']
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
+            supporter: [false, Validators.required],
+            password: ['', Validators.required],
+            verifyPassword: ['']
         });
     }
 
     submitForm(form: FormGroup): void {
-        console.log('submit form');
-
         this.subs.add(
             this.httpService.createAccount(form.value).subscribe(
                 res => {
