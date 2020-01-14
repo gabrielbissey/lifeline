@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content>
-    <div class="form-container">
+    <div
+        *ngIf="!showLoader"
+        class="form-container"
+    >
         <form
             [formGroup]="createAccountForm"
             (ngSubmit)="submitForm(createAccountForm)"
@@ -87,5 +90,12 @@
         >
             Back
         </ion-button>
+    </div>
+    <div
+        *ngIf="showLoader"
+        class="spinner-container"
+    >
+        <ion-spinner>
+        </ion-spinner>
     </div>
 </ion-content>
