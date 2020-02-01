@@ -9,6 +9,7 @@ const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mo
 const dbName = 'myProject';
 const port = 3000;
 const app = express();
+
 const client = new MongoClient(uri);
 
 app.use(express.json());

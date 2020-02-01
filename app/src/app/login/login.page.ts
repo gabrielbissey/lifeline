@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
     submitForm(form: FormGroup): void {
         console.log(form.value);
 
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['dashboard']);
 
 
         // should eventually call the http service login method

@@ -2,6 +2,10 @@
 @jsonContent = content-type: application/json
 
 ###
+GET {{url}}
+{{jsonContent}}
+
+###
 POST {{url}}/create-account
 {{jsonContent}}
 
