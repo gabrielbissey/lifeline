@@ -1,7 +1,6 @@
 const express = require('express');
 const assert = require('assert');
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
 const dbCreds = require('./db-creds');
 const cors = require('cors');
 
@@ -10,7 +9,7 @@ const dbName = 'myProject';
 const port = 3000;
 const app = express();
 
-const schema = require('./schema');
+const model = require('./model');
 
 mongoose.connect(uri, {useUnifiedTopology: true});
 // const client = new MongoClient(uri);
@@ -25,7 +24,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     // console.log('were connected');
 
-    const user = new schema.User({
+    const user = new model.User({
         name: "urmom"
     });
 
@@ -34,7 +33,7 @@ db.once('open', function() {
     //     console.log('successfully created user', user);
     // });
 
-    schema.User.find((err, users) => {
+    model.User.find((err, users) => {
         if (err) console.log('there was an error');
         else console.log(users);
     });
