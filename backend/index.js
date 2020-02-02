@@ -9,7 +9,7 @@ const dbName = 'myProject';
 const port = 3000;
 const app = express();
 
-const model = require('./model');
+const model = require('./database/model');
 
 mongoose.connect(uri, {useUnifiedTopology: true});
 // const client = new MongoClient(uri);
