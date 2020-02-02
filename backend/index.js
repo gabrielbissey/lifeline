@@ -1,6 +1,6 @@
 const express = require('express');
-const db = require('./db');
 const assert = require('assert');
+const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const dbCreds = require('./db-creds');
 const cors = require('cors');
@@ -10,12 +10,35 @@ const dbName = 'myProject';
 const port = 3000;
 const app = express();
 
-const client = new MongoClient(uri);
+const schema = require('./schema');
+
+mongoose.connect(uri, {useUnifiedTopology: true});
+// const client = new MongoClient(uri);
 
 app.use(express.json());
 app.use(cors());
 
 // npx nodemon to run nodemon
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    // console.log('were connected');
+
+    const user = new schema.User({
+        name: "urmom"
+    });
+
+    // user.save(function (err, user) {
+    //     if (err) return console.error(err);
+    //     console.log('successfully created user', user);
+    // });
+
+    schema.User.find((err, users) => {
+        if (err) console.log('there was an error');
+        else console.log(users);
+    });
+});
 
 const getCollection = (db) => {
     return db.collection('documents');
