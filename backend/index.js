@@ -3,95 +3,52 @@ const assert = require('assert');
 const mongoose = require('mongoose');
 const dbCreds = require('./db-creds');
 const cors = require('cors');
-
-const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mongodb.net/test?retryWrites=true&w=majority`
-const dbName = 'myProject';
-const port = 3000;
-const app = express();
-
 const model = require('./database/model');
 
-mongoose.connect(uri, {useUnifiedTopology: true});
-// const client = new MongoClient(uri);
+const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mongodb.net/test?retryWrites=true&w=majority`
+const port = 3000;
+const app = express();
+const db = mongoose.connection;
 
 app.use(express.json());
 app.use(cors());
 
-// npx nodemon to run nodemon
+mongoose.connect(uri, {useUnifiedTopology: true});
 
-var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    // console.log('were connected');
-
-    const user = new model.User({
-        name: "urmom"
-    });
-
-    // user.save(function (err, user) {
-    //     if (err) return console.error(err);
-    //     console.log('successfully created user', user);
-    // });
-
-    model.User.find((err, users) => {
-        if (err) console.log('there was an error');
-        else console.log(users);
-    });
+db.once('open', () => {
+    console.log('Successfully connected to database.');
 });
 
-const getCollection = (db) => {
-    return db.collection('documents');
-}
-
-const dbContext = (fn) => {
-    client.connect((err) => {
-        assert.equal(null, err);
-        console.log('Connected successfully to database');
-
-        const db = client.db(dbName);
-        const coll = getCollection(db);
-
-        fn(err, coll);
-    });
-}
-
 app.get('/', (req, res) => {
-    res.json({route: 'test'});
-})
+    model.User.find((err, users) => {
+        console.log('found users');
+        res.json({users});
+    });
+});
 
 app.post('/create-account', (req, res) => {
     const user = req.body;
 
-    dbContext((err, coll) => {
-        coll.insertOne(user, (err, result) => {
-            assert.equal(err, null);
-            assert.equal(1, result.result.n);
-            assert.equal(1, result.ops.length);
-            
+    const newUser = new model.User(user);
 
-            res.json({
-                success: true,
-                message: `Successfully created user ${user.email}`
-            })
-            client.close();
-        });
-    });
+    newUser.save((err, user) => {
+        if (err) return console.err(err);
+        console.log('Created new user');
+
+        res.json(user);
+    })
 });
 
 app.get('/user', (req, res) => {
+    const user = req.query;
 
-    dbContext((err, coll) => {
+    console.log(req.query);
 
-        coll.find({email: req.query.email}).toArray((err, users) => {
-            assert.equal(err, null);
-
-            const user = users[0];
-
-            console.log(`Successfully retrieved user ${user.email}`);
-            
-            res.send(user);
-            client.close();
-        });
+    model.User.find({email: user.email}, (err, user) => {
+        if (err) return console.error(err);
+        console.log('Found user', user[0].email);
+        res.json(user);
     });
 });
 

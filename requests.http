@@ -10,7 +10,7 @@ POST {{url}}/create-account
 {{jsonContent}}
 
 {
-    "email": "gabrielbissey",
+    "email": "email@spirit",
     "firstName": "Gabriel",
     "lastName": "Bissey",
     "phoneNumber": "555-555-5555",
@@ -18,4 +18,4 @@ POST {{url}}/create-account
 }
 
 ###
-GET {{url}}/user?email=gabrielbissey@gmail.com
+GET {{url}}/user?email=email@spirit
