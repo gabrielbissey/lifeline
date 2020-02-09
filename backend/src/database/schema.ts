@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
 
-const user = new mongoose.Schema({
+export const user = new mongoose.Schema({
     name: String,
     email: String,
     firstName: String,
@@ -8,7 +8,3 @@ const user = new mongoose.Schema({
     phoneNumber: String,
     supporter: Boolean
 });
-
-module.exports = {
-    user
-};
