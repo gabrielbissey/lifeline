@@ -40,6 +40,12 @@ app.post('/create-account', (req, res) => {
     })
 });
 
+app.post('/login', (req, res) => {
+    res.json({
+        success: true
+    })
+});
+
 app.get('/user', (req, res) => {
     const user = req.query;
 
