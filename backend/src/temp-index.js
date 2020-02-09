@@ -1,7 +1,7 @@
 const express = require('express');
 const assert = require('assert');
 const mongoose = require('mongoose');
-const dbCreds = require('./db-creds');
+const dbCreds = require('./database/dbCreds');
 const cors = require('cors');
 const model = require('./database/model');
 

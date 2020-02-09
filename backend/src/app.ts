@@ -12,7 +12,7 @@ class App {
     }
 
     private mountRoutes(): void {
-        this.monitorBase();
+        // this.monitorBase();
         this.monitorCreateAccount();
         this.express.use('/', this.router)
     }
@@ -28,14 +28,17 @@ class App {
     private monitorCreateAccount(): void {
         this.router.post('/create-account', (req, res) => {
             const user = req.body;
-            const newUser = new model.User(user);
+            // const newUser = new model.User(user);
 
-            newUser.save((err, user) => {
-                if (err) return console.error(err);
-                console.log('Created new user');
+
+            res.json({msg: 'message'});
+
+            // newUser.save((err, user) => {
+            //     if (err) return console.error(err);
+            //     console.log('Created new user');
         
-                res.json(user);
-            });
+            //     res.json(user);
+            // });
         });
     }
 }
