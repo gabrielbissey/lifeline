@@ -1,22 +1,19 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import * as model from './databaseRepository/model';
-import { DBManagement } from './DBManagement';
+import { DBConnection } from './DBConnection';
 
-
-// TODO: Get promise from DBManagement class and call
-// mountRoutes() on a successful response.
 class App {
     public express: express;
     public router: express.Router;
-    private db: DBManagement;
+    private db: DBConnection;
 
     constructor() {
         this.express = express();
         this.express.use(cors());
         this.express.use(express.json());
         this.router = express.Router();
-        this.db = new DBManagement();
+        this.db = new DBConnection();
         this.waitForDBConnection();
     }
 
