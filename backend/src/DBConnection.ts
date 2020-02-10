@@ -11,7 +11,7 @@ export class DBConnection {
     }
 
     private connect(): void {
-        mongoose.connect('', {useUnifiedTopology: true});
+        mongoose.connect(dbURI, {useUnifiedTopology: true});
     }
 
     public attemptConnection() {

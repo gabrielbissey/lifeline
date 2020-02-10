@@ -39,8 +39,9 @@ class App {
 
     private mountBackupRoutes(): void {
         this.express.all('*', (req, res) => {
+            res.status(500);
             res.json({
-                message: 'There was an error connecting to the database.'
+                message: 'There was an internal server error'
             });
         });
     }
