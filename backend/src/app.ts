@@ -23,7 +23,10 @@ class App {
                 console.log('Successfully connected to database.');
                 this.mountRoutes();
             },
-            err => console.log('There was an error connecting to the database:', err)
+            err => {
+                console.log('There was an error connecting to the database:', err);
+                this.mountBackupRoutes();
+            }
         );
     }
 
@@ -32,6 +35,14 @@ class App {
         this.monitorCreateAccount();
         this.monitorGetUser();
         this.express.use('/', this.router)
+    }
+
+    private mountBackupRoutes(): void {
+        this.express.all('*', (req, res) => {
+            res.json({
+                message: 'There was an error connecting to the database.'
+            });
+        });
     }
 
     private monitorBase(): void {
