@@ -3,21 +3,35 @@ import * as cors from 'cors';
 import * as model from './databaseRepository/model';
 import { DBManagement } from './DBManagement';
 
+
+// TODO: Get promise from DBManagement class and call
+// mountRoutes() on a successful response.
 class App {
     public express: express;
     public router: express.Router;
-    public db: DBManagement;
+    private db: DBManagement;
 
     constructor() {
-        this.express = express()
+        this.express = express();
         this.express.use(cors());
         this.express.use(express.json());
         this.router = express.Router();
         this.db = new DBManagement();
-        this.mountRoutes()
+        this.waitForDBConnection();
+    }
+
+    private waitForDBConnection(): void {
+        this.db.attemptConnection().then(
+            () => {
+                console.log('Successfully connected to database.');
+                this.mountRoutes();
+            },
+            err => console.log('There was an error connecting to the database:', err)
+        );
     }
 
     private mountRoutes(): void {
+        console.log('mountRoutes()')
         this.monitorBase();
         this.monitorCreateAccount();
         this.monitorGetUser();

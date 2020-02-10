@@ -18,4 +18,4 @@ POST {{url}}/create-account
 }
 
 ###
-GET {{url}}/user?email=email@spirit
+GET {{url}}/user?email=newacct@email
