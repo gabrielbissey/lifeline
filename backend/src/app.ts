@@ -31,7 +31,6 @@ class App {
     }
 
     private mountRoutes(): void {
-        console.log('mountRoutes()')
         this.monitorBase();
         this.monitorCreateAccount();
         this.monitorGetUser();

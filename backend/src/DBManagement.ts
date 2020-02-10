@@ -14,29 +14,21 @@ export class DBManagement {
     constructor() {
         this.db = mongoose.connection;
         this.connect();
-        this.listenForError();
-        this.listenForConnection();
     }
 
-    connect(): void {
+    private connect(): void {
         mongoose.connect(dbURI, {useUnifiedTopology: true});
     }
 
     public attemptConnection() {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(true);
-            }, 1000);
+            this.db.once('open', () => {
+                resolve();
+            });
+
+            this.db.on('error', err => {
+                reject(err);
+            })
         })
-    }
-
-    listenForError(): void {
-        this.db.on('error', console.error.bind(console, 'connection error:'));
-    }
-
-    listenForConnection(): void {
-        this.db.once('open', () => {
-            console.log('Successfully connected to database.');
-        });
     }
 }
