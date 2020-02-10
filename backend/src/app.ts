@@ -10,7 +10,7 @@ class App {
 
     constructor() {
         this.express = express()
-        // this.express.use(cors());
+        this.express.use(cors());
         this.express.use(express.json());
         this.router = express.Router();
         this.db = new DBManagement();
@@ -58,24 +58,5 @@ class App {
         });
     }
 }
-
-// app.post('/create-account', (req, res) => {
-//     const user = req.body;
-
-//     const newUser = new model.User(user);
-
-//     newUser.save((err, user) => {
-//         if (err) return console.err(err);
-//         console.log('Created new user');
-
-//         res.json(user);
-//     })
-// });
-
-// app.post('/login', (req, res) => {
-//     res.json({
-//         success: true
-//     })
-// });
 
 export default new App().express
