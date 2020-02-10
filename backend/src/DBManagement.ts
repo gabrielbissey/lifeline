@@ -2,8 +2,8 @@ import * as mongoose from 'mongoose';
 
 import { dbURI } from './databaseRepository/dbURI';
 
-class DBManagement {
-    db;
+export class DBManagement {
+    db: any;
 
     constructor() {
         this.db = mongoose.connection;

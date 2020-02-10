@@ -1,9 +1,9 @@
 const express = require('express');
 const assert = require('assert');
 const mongoose = require('mongoose');
-const dbCreds = require('./database/dbCreds');
+const dbCreds = require('./databaseRepository/dbCreds');
 const cors = require('cors');
-const model = require('./database/model');
+const model = require('./databaseRepository/model');
 
 const uri = `mongodb+srv://${dbCreds.name}:${dbCreds.password}@cluster0-wvmfd.mongodb.net/test?retryWrites=true&w=majority`
 const port = 3000;

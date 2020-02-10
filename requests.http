@@ -10,7 +10,7 @@ POST {{url}}/create-account
 {{jsonContent}}
 
 {
-    "email": "newacct",
+    "email": "newacct@email",
     "firstName": "Gabriel",
     "lastName": "Bissey",
     "phoneNumber": "555-555-5555",
