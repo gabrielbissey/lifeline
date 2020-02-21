@@ -40,7 +40,7 @@ export class CreateAccountPage implements OnInit, OnDestroy {
         this.showLoader = true;
 
         this.subs.add(
-            this.httpService.createAccount(form.value).subscribe(
+            this.httpService.post(form.value, 'create-account').subscribe(
                 () => {
                     this.router.navigate(['login']);
                 }

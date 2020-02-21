@@ -17,10 +17,12 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
-    createAccount(user: User): Observable<any> {
-        return this.http.post(`${this.url}/create-account`, user, this.options);
-    }
-
+    /**
+     * @param body post body
+     * @param url api url
+     *
+     * Returns observable for post request to url.
+     */
     post(body: any, url: string): Observable<any> {
         return this.http.post(`${this.url}/${url}`, body, this.options);
     }
