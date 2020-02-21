@@ -65,20 +65,23 @@ class App {
                     console.error(err);
                     res.json({
                         success: false,
-                        message: 'There was an error logging in'
+                        message: 'There was an error logging in.'
                     });
                 }
 
                 if (users.length < 1) {
-                    console.log('Login unsuccessful, no user found');
+                    console.log('Login unsuccessful, no user found.');
                     res.json({
                         success: false,
                         message: 'No user found'
                     });
                 }
 
-                console.log('Found user', users[0].email);
-                res.json(users[0]);
+                console.log(users[0].email + ' successfully logged in.');
+                res.json({
+                    success: true,
+                    user: users[0]
+                });
             });
         });
     }

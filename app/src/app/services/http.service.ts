@@ -20,4 +20,8 @@ export class HttpService {
     createAccount(user: User): Observable<any> {
         return this.http.post(`${this.url}/create-account`, user, this.options);
     }
+
+    post(body: any, url: string): Observable<any> {
+        return this.http.post(`${this.url}/${url}`, body, this.options);
+    }
 }

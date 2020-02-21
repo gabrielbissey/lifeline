@@ -1,17 +1,23 @@
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { HttpService } from './../services/http.service';
+
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
     loginForm: FormGroup;
+    private subs = new Subscription();
 
     constructor(private fb: FormBuilder,
-                private router: Router) { }
+                private router: Router,
+                private httpService: HttpService) { }
 
     ngOnInit() {
         this.initForm();
@@ -25,12 +31,18 @@ export class LoginPage implements OnInit {
     }
 
     submitForm(form: FormGroup): void {
-        console.log(form.value);
+        this.subs.add(
+            this.httpService.post(form.value, 'login').subscribe(
+                res => {
+                    if (res.success) {
+                        this.router.navigate(['/']);
+                    }
+                }
+            )
+        );
+    }
 
-        this.router.navigate(['/']);
-
-
-        // should eventually call the http service login method
-        // and skip this class method entirely.
+    ngOnDestroy() {
+        this.subs.unsubscribe();
     }
 }
