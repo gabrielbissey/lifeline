@@ -32,6 +32,7 @@ class App {
 
     private mountRoutes(): void {
         this.monitorBase();
+        this.monitorLogin();
         this.monitorCreateAccount();
         this.monitorGetUser();
         this.express.use('/', this.router)
@@ -41,6 +42,7 @@ class App {
         this.express.all('*', (req, res) => {
             res.status(500);
             res.json({
+                success: false,
                 message: 'There was an internal server error'
             });
         });
@@ -49,7 +51,34 @@ class App {
     private monitorBase(): void {
         this.router.get('/', (req, res) => {
             res.json({
+                success: true,
                 message: 'Connected to backend successfully!'
+            });
+        });
+    }
+
+    private monitorLogin(): void {
+        this.router.post('/login', (req, res) => {
+            const user = req.body;
+            model.User.find({email: user.email}, (err, users) => {
+                if (err) {
+                    console.error(err);
+                    res.json({
+                        success: false,
+                        message: 'There was an error logging in'
+                    });
+                }
+
+                if (users.length < 1) {
+                    console.log('Login unsuccessful, no user found');
+                    res.json({
+                        success: false,
+                        message: 'No user found'
+                    });
+                }
+
+                console.log('Found user', users[0].email);
+                res.json(users[0]);
             });
         });
     }
