@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-create-account',
     templateUrl: './create-account.page.html',
     styleUrls: ['./create-account.page.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAccountPage implements OnInit, OnDestroy {
     subs = new Subscription();
