@@ -1,3 +1,4 @@
+import { LoginGuard } from './router-guards/login.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
     providers: [
         StatusBar,
         SplashScreen,
+        LoginGuard,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]
