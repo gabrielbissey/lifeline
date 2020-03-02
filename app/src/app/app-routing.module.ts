@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './router-guards/login.guard';
 
 const routes: Routes = [
     {
         path: '',
+        canActivate: [LoginGuard],
         loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
     },
     {
@@ -13,11 +15,7 @@ const routes: Routes = [
     {
         path: 'create-account',
         loadChildren: () => import('./create-account/create-account.module').then( m => m.CreateAccountPageModule)
-    },
-  {
-    path: 'settings',
-    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
-  }
+    }
 ];
 @NgModule({
     imports: [
