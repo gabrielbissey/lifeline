@@ -36,7 +36,7 @@ export class LoginPage implements OnInit, OnDestroy {
             this.httpService.post(form.value, 'login').subscribe(
                 res => {
                     if (res.success) {
-                        this.router.navigate(['/']);
+                        this.router.navigate(['/tabs/dashboard']);
                     }
                 }
             )
