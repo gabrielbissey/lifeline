@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Create Account</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div
+        *ngIf="!showLoader"
+        class="form-container"
+    >
+        <form
+            [formGroup]="createAccountForm"
+            (ngSubmit)="submitForm(createAccountForm)"
+        >
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">First Name</ion-label>
+                <ion-input
+                    formControlName="firstName"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Last Name</ion-label>
+                <ion-input
+                    formControlName="lastName"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Email</ion-label>
+                <ion-input
+                    formControlName="email"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Phone Number</ion-label>
+                <ion-input
+                    formControlName="phoneNumber"
+                    type="text"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Supporter</ion-label>
+                <ion-select
+                    formControlName="phoneNumber"
+                    type="text"
+                >
+                    <ion-select-option value="true">True</ion-select-option>
+                    <ion-select-option value="False">False</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Password</ion-label>
+                <ion-input
+                    formControlName="password"
+                    type="password"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-item color="primary" class="input-container small-shadow">
+                <ion-label color="dark">Verify Password</ion-label>
+                <ion-input
+                    formControlName="verifyPassword"
+                    type="password"
+                >
+                </ion-input>
+            </ion-item>
+            <ion-button
+                expand="block"
+                color="success"
+                type="submit"
+                class="create-account"
+                [disabled]="createAccountForm.invalid"
+            >
+                Create Account
+            </ion-button>
+        </form>
+        <ion-button
+            [routerLink]="['/login']" 
+            expand="block"
+            color="danger"
+            type="button"
+            class="back"
+        >
+            Back
+        </ion-button>
+    </div>
+    <div
+        *ngIf="showLoader"
+        class="spinner-container"
+    >
+        <ion-spinner>
+        </ion-spinner>
+    </div>
+</ion-content>
