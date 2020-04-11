@@ -42,7 +42,7 @@ export class LoginPage implements OnInit, OnDestroy {
                         this.stateService.user = res.body.user;
                         this.stateService.unclaimedRequests = res.body.unclaimedRequests;
                         this.router.navigate(['/tabs/dashboard']);
-                    }
+                      }
                 }
             )
         );

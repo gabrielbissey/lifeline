@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+import { StateService } from './../services/state/state.service';
+
 @Component({
     selector: 'app-dashboard',
     templateUrl: 'dashboard.page.html',
@@ -8,6 +10,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class DashboardPage {
 
-    constructor() { }
+    unclaimedRequests$ = this.stateService.unclaimedRequests$;
 
+    constructor(private stateService: StateService) { }
 }

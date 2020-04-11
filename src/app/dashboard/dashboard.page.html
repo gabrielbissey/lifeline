@@ -11,9 +11,6 @@
     </ion-item>
     <ion-card>
         <ion-icon name="create"></ion-icon>
-        <ion-card-content>2 Pending Requests</ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-content>2 Pending Requests</ion-card-content>
+        <ion-card-content>{{ unclaimedRequests$ | async }} Pending Requests</ion-card-content>
     </ion-card>
 </ion-content>

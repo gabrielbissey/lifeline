@@ -12,7 +12,7 @@ export class StateService {
     private _unclaimedRequests$ = new BehaviorSubject<number>(0);
 
     user$ = this._user$.asObservable();
-    unclaimedRequests$ = this._unclaimedRequests$.value;
+    unclaimedRequests$ = this._unclaimedRequests$.asObservable();
 
     get user() {
         return this._user$.value;
