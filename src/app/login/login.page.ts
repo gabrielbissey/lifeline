@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { SimpleResponse } from 'src/app/models/interfaces';
+import { StateService } from './../services/state/state.service';
 import { HttpService } from '../services/http/http.service';
 
 import { Subscription } from 'rxjs';
@@ -18,7 +20,8 @@ export class LoginPage implements OnInit, OnDestroy {
 
     constructor(private fb: FormBuilder,
                 private router: Router,
-                private httpService: HttpService) { }
+                private httpService: HttpService,
+                private stateService: StateService) { }
 
     ngOnInit() {
         this.initForm();
@@ -34,8 +37,10 @@ export class LoginPage implements OnInit, OnDestroy {
     submitForm(form: FormGroup): void {
         this.subs.add(
             this.httpService.post(form.value, 'login').subscribe(
-                res => {
+                (res: SimpleResponse) => {
                     if (res.success) {
+                        this.stateService.user = res.body.user;
+                        this.stateService.unclaimedRequests = res.body.unclaimedRequests;
                         this.router.navigate(['/tabs/dashboard']);
                     }
                 }

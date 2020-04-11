@@ -5,10 +5,11 @@ export interface User {
     phoneNumber: string;
     supporter: boolean;
     password: string;
-    verifyPassword: string;
+    personSupporting?: string;
 }
 
-export interface SimpleHttpResponse {
+export interface SimpleResponse {
     success: boolean;
     message: string;
+    body?: any;
 }
