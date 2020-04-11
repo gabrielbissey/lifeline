@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { HttpService } from './../services/http.service';
+import { HttpService } from '../services/http/http.service';
 
 import { Subscription } from 'rxjs';
 

@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class HttpService {
-    url = 'http://192.168.0.59:3000';
+    url = 'http://10.0.0.88:3000';
+    // url = 'http://192.168.0.59:3000';
     headers = new HttpHeaders({
         'content-type': 'application/json'
     });
