@@ -11,6 +11,7 @@ import { StateService } from './../services/state/state.service';
 export class DashboardPage {
 
     unclaimedRequests$ = this.stateService.unclaimedRequests$;
+    
 
     constructor(private stateService: StateService) { }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { User } from 'src/app/models/interfaces';
+import { User, SimpleUser } from 'src/app/models/interfaces';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,9 +9,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class StateService {
     private _user$ = new BehaviorSubject<User>(null);
+    private _personSupporting$ = new BehaviorSubject<SimpleUser>(null);
     private _unclaimedRequests$ = new BehaviorSubject<number>(0);
 
     user$ = this._user$.asObservable();
+    personSupporting$ = this._personSupporting$.asObservable();
     unclaimedRequests$ = this._unclaimedRequests$.asObservable();
 
     get user() {
@@ -22,6 +24,13 @@ export class StateService {
         this._user$.next(user);
     }
 
+    get personSupporting() {
+        return this._personSupporting$.value;
+    }
+
+    set personSupporting(user: SimpleUser) {
+        this._personSupporting$.next(user);
+    }
 
     get unclaimedRequests() {
         return this._unclaimedRequests$.value;

@@ -8,6 +8,12 @@ export interface User {
     personSupporting?: string;
 }
 
+export interface SimpleUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export interface SimpleResponse {
     success: boolean;
     message: string;
