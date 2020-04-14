@@ -6,6 +6,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardPage {
-    @Input() name: string | number;
+    @Input() iconName: string | number;
     @Input() content: string | number;
 }

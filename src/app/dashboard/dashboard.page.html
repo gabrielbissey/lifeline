@@ -10,6 +10,7 @@
         Welcome Back!
     </ion-item>
     <app-card
+        [content]="'There are ' + (unclaimedRequests$ | async) + ' unclaimed requests for ' + (personSupporting$ | async)"
     >
     </app-card>
 </ion-content>
