@@ -36,17 +36,18 @@ export class LoginPage implements OnInit, OnDestroy {
 
     submitForm(form: FormGroup): void {
         this.subs.add(
-            this.httpService.post(form.value, 'login').subscribe(
-                (res: SimpleResponse) => {
-                    if (res.success) {
-                        this.stateService.user = res.body.user;
-                        this.stateService.personSupporting = res.body.user.personSupporting;
-                        this.stateService.unclaimedRequests = res.body.unclaimedRequests;
-                        this.router.navigate(['/tabs/dashboard']);
-                      }
-                }
-            )
+            this.httpService.post(form.value, 'login').subscribe(this.handleLoginRes.bind(this))
         );
+    }
+
+    handleLoginRes(res: SimpleResponse): void {
+        if (res.success) {
+            const body = res.body;
+            this.stateService.user = body.user;
+            this.stateService.personSupporting = body.user.personSupporting;
+            this.stateService.unclaimedRequests = body.unclaimedRequests;
+            this.router.navigate(['/tabs/dashboard']);
+        }
     }
 
     ngOnDestroy() {
