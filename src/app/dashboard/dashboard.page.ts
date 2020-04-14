@@ -9,9 +9,8 @@ import { StateService } from './../services/state/state.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardPage {
-
     unclaimedRequests$ = this.stateService.unclaimedRequests$;
-    
+    personSupporting$ = this.stateService.personSupporting$;
 
     constructor(private stateService: StateService) { }
 }

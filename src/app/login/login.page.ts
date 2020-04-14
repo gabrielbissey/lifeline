@@ -40,6 +40,7 @@ export class LoginPage implements OnInit, OnDestroy {
                 (res: SimpleResponse) => {
                     if (res.success) {
                         this.stateService.user = res.body.user;
+                        this.stateService.personSupporting = res.body.user.personSupporting;
                         this.stateService.unclaimedRequests = res.body.unclaimedRequests;
                         this.router.navigate(['/tabs/dashboard']);
                       }

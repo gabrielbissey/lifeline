@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class StateService {
     private _user$ = new BehaviorSubject<User>(null);
-    private _personSupporting$ = new BehaviorSubject<SimpleUser>(null);
+    private _personSupporting$ = new BehaviorSubject<string>(null);
     private _unclaimedRequests$ = new BehaviorSubject<number>(0);
 
     user$ = this._user$.asObservable();
@@ -28,7 +28,7 @@ export class StateService {
         return this._personSupporting$.value;
     }
 
-    set personSupporting(user: SimpleUser) {
+    set personSupporting(user: string) {
         this._personSupporting$.next(user);
     }
 
