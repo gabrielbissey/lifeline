@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { StateService } from './../services/state/state.service';
@@ -12,5 +13,10 @@ export class DashboardPage {
     unclaimedRequests$ = this.stateService.unclaimedRequests$;
     personSupporting$ = this.stateService.personSupporting$;
 
-    constructor(private stateService: StateService) { }
+    constructor(private stateService: StateService,
+                private router: Router) { }
+
+    navToRequests(): void {
+        this.router.navigateByUrl('tabs/requests');
+    }
 }

@@ -11,6 +11,7 @@
     </ion-item>
     <app-card
         [content]="'There are ' + (unclaimedRequests$ | async) + ' unclaimed requests for ' + (personSupporting$ | async)"
+        (click)="navToRequests()"
     >
     </app-card>
 </ion-content>
