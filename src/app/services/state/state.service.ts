@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { User, SimpleUser } from 'src/app/models/interfaces';
+import { User, SimpleUser } from 'src/app/common/models/interfaces';
 
 import { BehaviorSubject } from 'rxjs';
 
