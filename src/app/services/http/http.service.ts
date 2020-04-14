@@ -16,6 +16,25 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
+    get(url: string, params?: object): Observable<any> {
+        if (params) {
+            const paramsString = this.getParamsStringFromObject(params);
+            return this.http.get(`${this.url}/${url}?${paramsString}`, this.options);
+        }
+
+        return this.http.get(`${this.url}/${url}`, this.options);
+    }
+
+    getParamsStringFromObject(obj: object): string {
+        let str = '';
+
+        for (const [key, value] of Object.entries(obj)) {
+            str += `${key}=${value}`;
+        }
+
+        return str;
+    }
+
     /**
      * @param body post body
      * @param url api url

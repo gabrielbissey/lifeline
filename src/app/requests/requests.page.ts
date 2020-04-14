@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { StateService } from './../services/state/state.service';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { HttpService } from './../services/http/http.service';
 
 @Component({
     selector: 'app-requests',
     templateUrl: 'requests.page.html',
-    styleUrls: ['requests.page.scss']
+    styleUrls: ['requests.page.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RequestsPage {
+    unclaimedRequests$ = this.http.get('get-requests', {user: this.stateService.personSupporting});
 
-    constructor() { }
-
+    constructor(private http: HttpService,
+                private stateService: StateService) { }
 }

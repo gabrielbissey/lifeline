@@ -6,4 +6,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <app-card
+        *ngFor="let req of unclaimedRequests$ | async"
+        [content]="req.name"
+    >
+    </app-card>
+</ion-content>
