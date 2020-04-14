@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SimpleResponse } from 'src/app/common/models/interfaces';
+import { SimpleResponse } from 'src/app/shared/models/interfaces';
 import { StateService } from './../services/state/state.service';
 import { HttpService } from '../services/http/http.service';
 

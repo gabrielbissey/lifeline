@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { DashboardPage } from './dashboard.page';
         IonicModule,
         CommonModule,
         FormsModule,
+        SharedModule,
         RouterModule.forChild([{ path: '', component: DashboardPage }])
     ],
     declarations: [DashboardPage]
