@@ -27,9 +27,18 @@ export class HttpService {
 
     getParamsStringFromObject(obj: object): string {
         let str = '';
+        let count = 0;
+        const entries = Object.entries(obj);
+        const entriesLen = entries.length;
 
-        for (const [key, value] of Object.entries(obj)) {
+        for (const [key, value] of entries) {
             str += `${key}=${value}`;
+
+            if (count < entriesLen - 1) {
+                str += '&';
+            }
+
+            count++;
         }
 
         return str;
